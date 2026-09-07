@@ -1,0 +1,683 @@
+{
+  "schema_version": 1,
+  "publication": {
+    "branch": "experiment/depth-replacement",
+    "result_tag": "result/depth-replacement-full60s-run001",
+    "execution_commit": "54decd4554fe22f2fdab405d08ba1f2f223584cb",
+    "baseline_tag": "baseline/calibrated-native-backend-full60s-v1",
+    "baseline_commit": "1042818a927cbd366e3397aefbd8d44ab5ca3ea7",
+    "result_publication_changes": "Documentation only; report addendum and selected-artifact index. No execution-source changes after the run.",
+    "output_root": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+    "file_sha256_paths_relative_to_output_root": true,
+    "baseline_dependency_lock": "docs/reproducibility/full60s_baseline.json",
+    "reproduction_instructions": "docs/depth_replacement_experiment.md",
+    "archives_outside_git": true,
+    "failed_experiment_stages": 0,
+    "unit_tests_passed": 25
+  },
+  "diagnostic_summary": {
+    "passed": true,
+    "git_head": "54decd4554fe22f2fdab405d08ba1f2f223584cb",
+    "baseline_commit": "1042818a927cbd366e3397aefbd8d44ab5ca3ea7",
+    "frames": 1800,
+    "fps": 30,
+    "predictions": {
+      "baseline": {
+        "observed_instances": 2872,
+        "generated_instances": 42,
+        "missing_slots": 686,
+        "observed_camera_geometry_max_error": 7.152557373046875e-7,
+        "both_hands_pinhole_vs_native_projection_max_px": 0.00018613504926179303,
+        "generated_owners_checked": 42,
+        "nonpositive_depth_frames": [
+          922
+        ],
+        "nonpositive_observed_instances": 0,
+        "scale": 0.26340703666210175
+      },
+      "stereo": {
+        "observed_instances": 2872,
+        "generated_instances": 42,
+        "missing_slots": 686,
+        "observed_camera_geometry_max_error": 5.960464477539062e-7,
+        "both_hands_pinhole_vs_native_projection_max_px": 0.00018613504926179303,
+        "generated_owners_checked": 42,
+        "nonpositive_depth_frames": [],
+        "nonpositive_observed_instances": 0,
+        "scale": 0.4085933715105057
+      },
+      "passed": true,
+      "same_hand_masks_ids_and_infiller_context": true,
+      "same_raw_droid_fields": true,
+      "observed_world_change_matches_only_camera_translation_scale_max_error": 2.0597223127083453e-7,
+      "generated_joint_camera_change_m": {
+        "count": 882,
+        "median": 0.0006904840702190995,
+        "p95": 0.00842061256989836,
+        "max": 0.1621887981891632
+      }
+    },
+    "trajectory": {
+      "alignment": "First-camera SE(3) origin only; no fitted scale alignment",
+      "arms": {
+        "baseline": {
+          "median_scale": 0.26340703666210175,
+          "path_length_m": 8.241959662323822,
+          "net_displacement_m": 0.44338381399281857,
+          "per_keyframe_scale": {
+            "count": 126,
+            "median": 0.26340703666210175,
+            "p95": 0.3792613372206688,
+            "max": 0.7779799103736877
+          },
+          "total_retries": 0,
+          "resized_invalid_pixels_total": 0
+        },
+        "stereo": {
+          "median_scale": 0.4085933715105057,
+          "path_length_m": 12.784814441394163,
+          "net_displacement_m": 0.6877708725181447,
+          "per_keyframe_scale": {
+            "count": 126,
+            "median": 0.4085933715105057,
+            "p95": 0.6095066964626312,
+            "max": 0.8602457642555237
+          },
+          "total_retries": 4,
+          "resized_invalid_pixels_total": 95081
+        }
+      },
+      "stereo_over_baseline_scale": 1.5511862427375045,
+      "position_difference_m": {
+        "count": 1800,
+        "median": 0.12039851696720885,
+        "p95": 0.24720780950540494,
+        "max": 0.2572963024194775
+      },
+      "camera_rotations_identical": true,
+      "interpretation": "Scale-source effects on the same monocular trajectory, not depth or pose accuracy"
+    },
+    "baseline_scale_regression": {
+      "passed": true,
+      "keyframes": 126,
+      "per_keyframe_max_difference": 0,
+      "median_difference": 0,
+      "same_threshold_expansion": true,
+      "no_metric3d_network_rerun": true
+    },
+    "protected_files_unchanged": 3833,
+    "unit_tests_exit_code": 0,
+    "stereo_timestamp_risk": {
+      "median_right_minus_left_s": -0.03333330154418945,
+      "pairs_over_20ms": 1798,
+      "right_duplicate_adjacent_timestamps": 2,
+      "interpretation": "Unresolved exposure/producer pairing semantics; cached-depth integration under user accuracy assumption, not depth ground truth"
+    },
+    "vio_used": false,
+    "accuracy_claim": "No accuracy claim; cached stereo depth is assumed usable for this integration test"
+  },
+  "depth_audit": {
+    "total_frames": 1800,
+    "frames_with_invalid_pixels": 353,
+    "invalid_source_pixels_total": 18738792,
+    "used_keyframes": 126,
+    "used_keyframes_with_invalid_source_pixels": 31,
+    "excluded_resized_pixels_total": 95081,
+    "cached_depth_adaptation_fit_export_seconds": 4.8567933090089355,
+    "threshold_expansion_rows": [
+      {
+        "frame_idx": 890,
+        "droid_keyframe_position": 50,
+        "scale": 0.026148930191993713,
+        "near": 2.7755575615628914e-17,
+        "far": 1.0999999999999999,
+        "retries": 4,
+        "empty_bands_skipped": 4,
+        "positive_background_support": 192961,
+        "initial_band_support_at_success": 192961,
+        "source_depth_sha256": "be030cb43b20d569e3a3aefaa5c7bdd3054e177f53d5222a546ee970b263e939",
+        "resized_invalid_pixels": 0,
+        "source_invalid_pixels": 0,
+        "resized_depth_m": {
+          "count": 194176,
+          "median": 0.05169060081243515,
+          "p95": 0.05843521188944578,
+          "max": 0.06532716006040573
+        },
+        "fit_cache_sha256": "a657592b5d3e6c0b111df97dd6aae23d535877cc7a67620af4349cb153d8f2b9"
+      }
+    ],
+    "source_depth_below_10cm_over_whole_resized_grid_examples": [
+      {
+        "frame": 890,
+        "source_min_m": 0.0454847551882267,
+        "source_median_m": 0.05169070512056351,
+        "source_max_m": 0.06536195427179337,
+        "native_fitted_scale": 0.026148930191993713
+      },
+      {
+        "frame": 928,
+        "source_min_m": 0.045869093388319016,
+        "source_median_m": 0.04873466491699219,
+        "source_max_m": 0.051033228635787964,
+        "native_fitted_scale": 0.02450031042098999
+      },
+      {
+        "frame": 931,
+        "source_min_m": 0.045252230018377304,
+        "source_median_m": 0.052700504660606384,
+        "source_max_m": 0.0909401923418045,
+        "native_fitted_scale": 0.024751337245106697
+      },
+      {
+        "frame": 1004,
+        "source_min_m": 0.04557419568300247,
+        "source_median_m": 0.049788687378168106,
+        "source_max_m": 0.05379923805594444,
+        "native_fitted_scale": 0.02765491046011448
+      }
+    ]
+  },
+  "generated_outliers": [
+    {
+      "frame": 1344,
+      "side": 0,
+      "max_joint_change_m": 0.1621887981891632,
+      "baseline_min_joint_z_m": 0.09877197444438934,
+      "stereo_min_joint_z_m": 0.18577557802200317
+    },
+    {
+      "frame": 922,
+      "side": 0,
+      "max_joint_change_m": 0.07916520535945892,
+      "baseline_min_joint_z_m": -0.02491510659456253,
+      "stereo_min_joint_z_m": 0.013706251978874207
+    },
+    {
+      "frame": 1590,
+      "side": 1,
+      "max_joint_change_m": 0.008469929918646812,
+      "baseline_min_joint_z_m": 0.4007754921913147,
+      "stereo_min_joint_z_m": 0.39248719811439514
+    },
+    {
+      "frame": 512,
+      "side": 1,
+      "max_joint_change_m": 0.004036941099911928,
+      "baseline_min_joint_z_m": 0.5531615018844604,
+      "stereo_min_joint_z_m": 0.5542894601821899
+    },
+    {
+      "frame": 1582,
+      "side": 0,
+      "max_joint_change_m": 0.00232021976262331,
+      "baseline_min_joint_z_m": 0.4866817891597748,
+      "stereo_min_joint_z_m": 0.48765215277671814
+    }
+  ],
+  "render_seconds": 814.8907812709949,
+  "full_stage_runtime": {
+    "world_seconds": 2.385075725003844,
+    "fill_export_seconds": 6.474060790002113,
+    "baseline_full_reused": false
+  },
+  "stages": [
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "prepare"
+      ],
+      "exit_code": 0,
+      "seconds": 33.44121593500313,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788792912553671034_prepare.log",
+      "stage": "prepare"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "pilot"
+      ],
+      "exit_code": 0,
+      "seconds": 11.288987442996586,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788792945995255541_pilot.log",
+      "stage": "pilot"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "render-pilot"
+      ],
+      "exit_code": 0,
+      "seconds": 59.87587931699818,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788792957284628989_render-pilot.log",
+      "stage": "render-pilot"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "validate"
+      ],
+      "exit_code": 0,
+      "seconds": 3.445307578003849,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788793238814246538_validate.log",
+      "stage": "validate"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "full"
+      ],
+      "exit_code": 0,
+      "seconds": 22.06801959099539,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788793242259904843_full.log",
+      "stage": "full"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "render"
+      ],
+      "exit_code": 0,
+      "seconds": 847.3268368680001,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788793264328361762_render.log",
+      "stage": "render"
+    },
+    {
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_depth_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001",
+        "--stage",
+        "report"
+      ],
+      "exit_code": 0,
+      "seconds": 32.136974824999925,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/depth_replacement_full_60s/process_logs/run_001/1788794111655539592_report.log",
+      "stage": "report"
+    }
+  ],
+  "windows_count": 30,
+  "videos": {
+    "baseline_overlay.mp4": {
+      "sha256": "13cd80b35bd139f66cea2bdd5ac517c9b4103a5f05470ecfa3068528a97939f9",
+      "full_decode_passed": true,
+      "width": 1920,
+      "height": 1074,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    },
+    "stereo_overlay.mp4": {
+      "sha256": "483d1d2f60bd0bab0e9629bcb1bb6f44484d0ac365ee4e68452549e0fa3cf755",
+      "full_decode_passed": true,
+      "width": 1920,
+      "height": 1074,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    },
+    "comparison.mp4": {
+      "sha256": "3944a1fa6b80338a25993ec54e04f72439f0d37c9108f6978a84a537787ff61b",
+      "full_decode_passed": true,
+      "width": 5760,
+      "height": 1074,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    },
+    "world_observed_comparison.mp4": {
+      "sha256": "ef74a9733021003d8722ca735f78289594ecba6514c0a1e235a44954bef37b52",
+      "full_decode_passed": true,
+      "width": 1920,
+      "height": 720,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    },
+    "world_completed_comparison.mp4": {
+      "sha256": "7f0b5642eb098ccfc8fe4fbe8fb4e76d3d2c20aec03d4f19b283ce2f8e96e177",
+      "full_decode_passed": true,
+      "width": 1920,
+      "height": 720,
+      "avg_frame_rate": "30/1",
+      "nb_frames": "1800"
+    }
+  },
+  "visual_inspection": {
+    "stage": "Post-run manual inspection; no inference or renderer changes",
+    "execution_commit": "54decd4554fe22f2fdab405d08ba1f2f223584cb",
+    "inspected": [
+      "pilot/depth_samples.png",
+      "pilot/screenshots/comparison_000091.jpg",
+      "pilot/screenshots/world_completed_000196.jpg",
+      "screenshots/comparison_000599.jpg",
+      "screenshots/comparison_000922.jpg",
+      "screenshots/comparison_001344.jpg",
+      "screenshots/world_observed_000599.jpg",
+      "screenshots/world_observed_001780.jpg",
+      "depth_samples.png",
+      "depth_scale_comparison.png"
+    ],
+    "findings": [
+      "Inspected observed hand projections coincide between arms; meshes and both anatomical sides render.",
+      "Generated left hands at frames 922 and 1344 still visibly deviate strongly from the real hands in BOTH arms.",
+      "Frame 922 becomes positive-depth in the stereo result but remains visibly erroneous; no pose-improvement claim.",
+      "Full world view uses a common camera and first-camera SE(3) origins without fitted scale. Hands are small in this overview; inspect RGB for pose detail and the trajectory plot for scale.",
+      "Scale curves contain pronounced stereo low-scale outliers. Source frame 890 is visibly motion blurred and its ORIGINAL cached depth spans only 0.045484755..0.065361954 m, median 0.051690705 m.",
+      "The source-depth concern is not caused by this adapter. No frame is rejected, renamed, depth-corrected or smoothed. Motion blur and timestamp discrepancy are possible concerns, not established causes."
+    ],
+    "supplementary_screenshot_attempts": [
+      {
+        "shell_command": "ffmpeg -v error -n -i outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001/comparison.mp4 -vf select=eq\\(n\\,1344\\) -frames:v 1 -q:v 2 outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001/screenshots/comparison_001344.jpg",
+        "exit_code": 1,
+        "error": "Incorrect shell/filter escaping: Missing ')' or too many args in 'eq(n'. No inference or existing video changed."
+      },
+      {
+        "shell_command": "ffmpeg -v error -n -i outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001/comparison.mp4 -vf 'select=eq(n\\,1344)' -frames:v 1 -q:v 2 outputs/pre_frontend_comparison/depth_replacement_full_60s/run_001/screenshots/comparison_001344.jpg",
+        "exit_code": 0
+      }
+    ],
+    "accuracy_evaluation": false
+  },
+  "source_configuration": {
+    "input": "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/rectified/videos/left_rectified.mp4",
+    "frames_inclusive": [
+      0,
+      1799
+    ],
+    "fps": 30,
+    "image_size": [
+      1920,
+      1074
+    ],
+    "camera_intrinsics": [
+      [
+        444.43963608648465,
+        0,
+        959.954470803018
+      ],
+      [
+        0,
+        444.43963608648465,
+        543.9405836940584
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "depth_source": "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/depth_only",
+    "depth_units": "Saved left-reference camera-axis Z in meters; inference scale already applied; no second 0.5 multiplier",
+    "foundation_producer_checkpoint_and_command": "Not recoverable from provided metadata; cached file hashes pin consumed results, not producer reproduction",
+    "droid_cache": "/home/user/HaWoR/outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/droid_raw.npz",
+    "droid_keyframes": [
+      0,
+      12,
+      27,
+      40,
+      53,
+      71,
+      76,
+      81,
+      85,
+      89,
+      93,
+      98,
+      110,
+      112,
+      114,
+      116,
+      120,
+      132,
+      142,
+      182,
+      197,
+      207,
+      244,
+      248,
+      255,
+      268,
+      275,
+      292,
+      303,
+      312,
+      347,
+      356,
+      367,
+      379,
+      399,
+      420,
+      444,
+      490,
+      512,
+      644,
+      676,
+      691,
+      700,
+      789,
+      799,
+      823,
+      833,
+      863,
+      867,
+      874,
+      890,
+      894,
+      905,
+      916,
+      928,
+      931,
+      936,
+      943,
+      957,
+      970,
+      973,
+      976,
+      985,
+      1004,
+      1007,
+      1011,
+      1021,
+      1047,
+      1050,
+      1056,
+      1073,
+      1077,
+      1084,
+      1101,
+      1104,
+      1111,
+      1121,
+      1142,
+      1145,
+      1149,
+      1154,
+      1169,
+      1172,
+      1175,
+      1182,
+      1205,
+      1216,
+      1246,
+      1253,
+      1280,
+      1291,
+      1303,
+      1318,
+      1322,
+      1325,
+      1329,
+      1345,
+      1362,
+      1396,
+      1400,
+      1403,
+      1407,
+      1416,
+      1423,
+      1441,
+      1476,
+      1491,
+      1505,
+      1516,
+      1550,
+      1577,
+      1581,
+      1585,
+      1589,
+      1593,
+      1597,
+      1599,
+      1601,
+      1603,
+      1607,
+      1718,
+      1735,
+      1756,
+      1775,
+      1797,
+      1799
+    ],
+    "geometry_policy": "Preserve native direct depth/mask resize to 592x328; do not silently replace with RGB resize-to-592x331 then crop",
+    "invalid_depth_policy": "Exclude invalid contributors from resized support; NaN outside support, never fake zero-depth fit evidence",
+    "scale_fit": {
+      "function": "unmodified lib.pipeline.est_scale.est_scale_hybrid",
+      "sigma": 0.5,
+      "initial_near": 0.4,
+      "initial_far": 0.7,
+      "threshold_carry_across_keyframes": true,
+      "aggregate": "median",
+      "max_attempts": 100
+    },
+    "hand_policy": "Frozen optimized B observations, camera predictions and physical/side ownership-bounded native infiller",
+    "python": "3.10.13 (main, Sep 11 2023, 13:21:10) [GCC 11.2.0]",
+    "torch": "1.13.0+cu117",
+    "cuda": "11.7",
+    "gpu": "NVIDIA GeForce RTX 4070",
+    "foreign_git_head": "e815c8b14215211d9ed012c3a2849ae11238b26e",
+    "foreign_git_status_before": "M README.md\n M docs/pipeline/hand_observation_optimization_baseline.md\n M roboego_hand_vis/settings.py\n?? docs/pipeline/pre_hamer_observation_frontend_migration.md\n?? roboego_hand_vis/egohand/pre_hamer_observation_frontend.py\n?? tests/egohand/test_pre_hamer_observation_frontend.py"
+  },
+  "file_sha256": {
+    "aligned_camera_trajectories.npz": "fc5c8353e36e416c347ece563d9ec40771ecbcfb9ef00a22572236ad37b9d6ce",
+    "arms/baseline/cache/full/optimized/slam_scaled.npz": "82987fb04d1541db1f10bfd7b254e0bd6470f24b5e39af3ceea4b48af55877d6",
+    "arms/baseline/predictions/optimized/infiller_audit.json": "e771fcbef4669c13cc4964c80622d5d3bcae55980434bd44dd3045acd9357004",
+    "arms/baseline/predictions/optimized/world_completed.npz": "e1c0904f02e8138a2e10a49174b0f9604a124b20e969d79741a1354629c7986a",
+    "arms/baseline/predictions/optimized/world_observed.npz": "006dbc365de2901ca596efd6c9d8cb04bfd8fb1b3be724151c4dcfb970333392",
+    "arms/baseline/predictions/optimized/world_validation.json": "9a366e5848e171684428c4254bd1dc3dc9b5bb2c28feb11f536b6629d7f67261",
+    "arms/stereo/cache/full/optimized/slam_scaled.npz": "c64548b2d1a2f3ab0b0a17498da635d8a245b6e648de132d03b0e5e9236f8da8",
+    "arms/stereo/predictions/optimized/infiller_audit.json": "b0fa498694e266df71eeb361d982c18b6d7d8a319b92d3d30f3fc2f65c9522c9",
+    "arms/stereo/predictions/optimized/world_completed.npz": "102ba8e4744f68b60782f13e25dfd5176cd8e2ccff9d34d0f52fdc98aedd87ef",
+    "arms/stereo/predictions/optimized/world_observed.npz": "29f3801500a569526c2a6154be90ec11a62f5c596c9884fd4f02ccc5c1117ec0",
+    "arms/stereo/predictions/optimized/world_validation.json": "9a366e5848e171684428c4254bd1dc3dc9b5bb2c28feb11f536b6629d7f67261",
+    "baseline_overlay.mp4": "13cd80b35bd139f66cea2bdd5ac517c9b4103a5f05470ecfa3068528a97939f9",
+    "cache/baseline_replay/baseline/scale_audit.json": "6d614f8ee74ca8ae364a6875a1f1a74a662a6b64332312039b955f45d327d16b",
+    "cache/baseline_scale_regression.json": "77903f2700f6e36495fd19372b68d9548d3a5187f26f6bf7399da5ca0b56bfb4",
+    "cache/depth_inventory.json": "3cfb995ce28d51197903bbf6b35c7e1b6da79ed375bd26a928a98cbe567cbd57",
+    "cache/full/stereo/scale_audit.json": "85d3a9887a119303fce98f87541f50c06980a2d3c10f815fcbaae9bc1adb4236",
+    "comparison.mp4": "3944a1fa6b80338a25993ec54e04f72439f0d37c9108f6978a84a537787ff61b",
+    "depth_samples.png": "1725747d9d6f03b480b69f568b63b108cdb32918fe91ffd8c0928bd21b3118d1",
+    "depth_scale_comparison.png": "6ec96127d7ae109f3d588288d79b2334b2680948ef625c16cf7d4a79d33bfc21",
+    "diagnostics.json": "97d8b4d40a9a46b3cb512d36884706f1f38cd9cc29635e69c08b71b163306462",
+    "logs/1788792912553671034_prepare.json": "2682a3131b3606e28b358f91611ce88a42881d4a900912f9ff53f30ed95a3eae",
+    "logs/1788792912553671034_prepare.log": "0f63cda8ae23329f28d4a6d598b38b9f7f8d652400558a5056e4b9ea14703b4b",
+    "logs/1788792945736432192_prepare.json": "d6b5a2eeeed49ba3e240520a33b838713e5dea626e221baeb7bec3d8702b6768",
+    "logs/1788792945995255541_pilot.json": "350228f11c769209aeed362e6d91841becd1eb7a78c7ea1bd3f25bf0827579ad",
+    "logs/1788792945995255541_pilot.log": "438639c78c630fb23c105fcb57ea79f4c2ab705263f92517192ae7449c00bf39",
+    "logs/1788792956937594054_pilot.json": "cdd41b2de2962d87223b90d70bbc4c1ee34b70aa4847e5696e142d22af652b6a",
+    "logs/1788792957284628989_render-pilot.json": "684aea964b802c3ee64f8e9138714a50e81f1445d43730c157080d857584c075",
+    "logs/1788792957284628989_render-pilot.log": "0536c1e88f1ec02a672b77d2a13920167323dab2b5cdae7c236b1f612a2035b1",
+    "logs/1788793016810396159_render-pilot.json": "3cb04d80f689a8037a9857f271cc3a91a9c120cc110b19b9da8d067cc5d1d5d2",
+    "logs/1788793238814246538_validate.json": "817a1efa789dbd1e9964c1db0e5008315fd222d415675d54f1997753da8c0938",
+    "logs/1788793238814246538_validate.log": "fb5b5a635add65159cfad39d1ad24902bba4a89f51e4f32bf0cd113feee6c58b",
+    "logs/1788793242002633968_validate.json": "16b0d136c33b7670454183337721e9dd2fb995407b743712210bc22ea47f1ebc",
+    "logs/1788793242259904843_full.json": "dad26bb9f3ed4cc06e4747e3d02aa1278ea4af24d8696697c23b5c256e2e1ad7",
+    "logs/1788793242259904843_full.log": "bd8ab20aed7185e6151c77cecf9e09f2cbafdec405714438e518b6fd47c84ac3",
+    "logs/1788793264007830494_full.json": "02ab7b4153bf43372707b20ef55d21c6d700abc0bf829d17a1dd188271c6e2e3",
+    "logs/1788793264328361762_render.json": "fa203705ffe81dea04f43e1fb76e4e5c01a6ec8f7b4282e4b9081dffcca7ebd8",
+    "logs/1788793264328361762_render.log": "614449771645b6a47ede3a0857460aafa9ccce0946361ff398895f8c3e820f1e",
+    "logs/1788794111274817448_render.json": "7cae5ffd600fac05e663af079d3760a3494dcdfaf2ebf8a91cb11562e6a6b70b",
+    "logs/1788794111655539592_report.json": "daf0ca164c0cfa7119dfac8c3f1b9f0e2a96101414ff9e5a921cf7f1f62d3115",
+    "logs/1788794111655539592_report.log": "932524c7c6233ea5e0a9d2930fa39b5e7d220c2da468f715c7e11196b695fdd7",
+    "logs/1788794143458156357_report.json": "d79c688ce5ba717c33db51ce7e03111e0022142e4038412fd4301bee94dfb2bf",
+    "manifest.json": "1b626421b1f52e52c8a7b18897a9a2e136015f962d6425b784c4236f305f3552",
+    "pilot/prediction_audit.json": "8eeb99ce4481d055a5bb9ea19993a51617df352aca50634afdfbc5998442ae6d",
+    "pilot/render_audit.json": "c8718fe0242826f0845d5124925874c20999040d9ff1b6fe8a518f90f47f7a22",
+    "pilot/validation.json": "3362fd9efbcea59d88f8ae42bb9e8594a0ceb60145df33b72929b2daf1a61c9e",
+    "prediction_audit.json": "12e584b59574c8c7685ad670fa71ac481ec581afb633e37d2cd44ecfec0fe686",
+    "provenance/pip-freeze.txt": "94004e42c0a21c014b5b97d373c0a03833f7ed57b7f25e6294628a0116b93d5a",
+    "provenance/submodules.txt": "54d196b8b779cda3603a4fdc589c41546f89811d71408eeef40489878ee101f3",
+    "provenance/unittest.log": "865072067fe06baac33bc0107e0362472c428ebc1461bab67769b5cbdaa1736c",
+    "render_audit.json": "b95ce32ead5a7b8a4fa6a00987cd90b44c6de1e15b01f8c90cf5dff86b1d0471",
+    "report.md": "2db39c518f8c9fb8db6664f7fcb69df78c5d2bc15bd2b1efc2a35256f2190037",
+    "screenshots/comparison_001344.jpg": "dd0976665b3aac53621e2abc809958d5e0190cc63f49763b0e9460dcb0c24b31",
+    "stereo_overlay.mp4": "483d1d2f60bd0bab0e9629bcb1bb6f44484d0ac365ee4e68452549e0fa3cf755",
+    "visual_inspection.json": "4d0d3047543ed1cd9a03fa7be5502b7c62dd56a42419776bc4e34ffe5dd75d54",
+    "windows/0088-0094/baseline_overlay.mp4": "59c75a78467fb25cfcc1ae0c2ac2af59aede4f7e928225cd51fad3cb2e3ae078",
+    "windows/0088-0094/comparison.mp4": "e874258bf458c29ebeedfb083a55da118243f5e1b1b064aa76ec19c0a6100a57",
+    "windows/0088-0094/stereo_overlay.mp4": "a6fa46660adcbd9f3012de8733b62fdc551410d4bfe82f1c03544d9a6dbd82ad",
+    "windows/0088-0094/world_completed_comparison.mp4": "bae9effd5b37897f4d73f6db40dace93dff8be2c66984fab6cb4064fb8cb960d",
+    "windows/0088-0094/world_observed_comparison.mp4": "709f7ac22e7714a178f52c7946fff876e66873d343be338e1a91842f0561f4c5",
+    "windows/0100-0114/baseline_overlay.mp4": "7d3c8ab428c969bca0ee33f28af26aca07298c4fdbbb3262f66b7c2c6df7704a",
+    "windows/0100-0114/comparison.mp4": "fbaea16907cab5d821813737f1ac02e6bfdd81563ac0ec89d13ba35c83299de3",
+    "windows/0100-0114/stereo_overlay.mp4": "1cd80a708f2accbfc14938ecccd998b06eda0f0b0144e8f1d118d0dd1a61736a",
+    "windows/0100-0114/world_completed_comparison.mp4": "0f58598e367ebf0204379c0529b38c964f981f1aacfdabede0f93cc13f3a6995",
+    "windows/0100-0114/world_observed_comparison.mp4": "bb4a0dcdc919c8e0b4397fffb4aafb9868b5c22db80a864d6c2cd9ed45441c5c",
+    "windows/0176-0182/baseline_overlay.mp4": "54df099d1f20eb3c0534168847e46b629946b92e7667cd21d8295392eeadb804",
+    "windows/0176-0182/comparison.mp4": "b2aa87500b4d6e4cadbd07a3af20cdd0feea605029defd6c5f2ecd76908ec20d",
+    "windows/0176-0182/stereo_overlay.mp4": "cbcf49294a95f6d3661500a266a574345cbdd66fb8887ca452ce9dce09420c2e",
+    "windows/0176-0182/world_completed_comparison.mp4": "70e0e35d1425b5bb0c903395930b93bf430d9ae3f920309d615b74c3eba73d22",
+    "windows/0176-0182/world_observed_comparison.mp4": "427f72bb5a9b7c43dc5e67fb2f0b6c0b88799ce09a54ace12e33c8e139b07c3a",
+    "windows/0193-0201/baseline_overlay.mp4": "7861659b97f114e228b8173f2cab94bbe4f21c8b4b7f1c05d41254d4349d19bb",
+    "windows/0193-0201/comparison.mp4": "698498746207c099122d67406795060f390ac42bfd153c476065bad2e01f62e6",
+    "windows/0193-0201/stereo_overlay.mp4": "95e08ea5b579f6feaaf5072d3bd738d754b0e3b5001e2409b03a093f1ee0857f",
+    "windows/0193-0201/world_completed_comparison.mp4": "4d0f2016a864d042a3bdb81759dacd0ad71af78c42ee23b2dc26ea26449fa9bb",
+    "windows/0193-0201/world_observed_comparison.mp4": "bd0990e0cdcb2c16ac16ed42c4dc01f103d9d4a5bd81f1513aee2735c4d4f923",
+    "windows/0596-0602/baseline_overlay.mp4": "12bb6027b0195b493a03371d161b1125840f0ceff30e4d2e3a281a53cc253644",
+    "windows/0596-0602/comparison.mp4": "f30fae6c7d6e9222d710f5a46ac25cc800abf7fea78491cf0db3dc51f35e2b13",
+    "windows/0596-0602/stereo_overlay.mp4": "d95363dba03313bc5fe2fe9f9ff42295f8802f8505ef5042ff776affe26a139c",
+    "windows/0596-0602/world_completed_comparison.mp4": "36f9345d519b7ba1d545401b36aaf09036ed78a95609861c99858a58d7413fea",
+    "windows/0596-0602/world_observed_comparison.mp4": "968b817bf4c973bbc519bbef442792c010ad1f910cf09fcc09dbed172d320fbd",
+    "windows/0918-0926/baseline_overlay.mp4": "cb53b044a3ad028059e388242acd160601b93da06afa6104bdf5919de06a1941",
+    "windows/0918-0926/comparison.mp4": "156f077f2f57ca66802ef2f3a48a6a8b4aceee98de0d46fe779c7baf454d7fc2",
+    "windows/0918-0926/stereo_overlay.mp4": "bea306d8acd7e6e3c47bd139391e90fa827d9f3352a5a816ea9d94e15424b7d5",
+    "windows/0918-0926/world_completed_comparison.mp4": "14a1fc2f8bd5748ebf679e5b99b694e55945532a7c2a9bb18cdac694b6c51fda",
+    "windows/0918-0926/world_observed_comparison.mp4": "f48c874d44c68eb777f6b12d5114039ffb65781d33dc5f48d4cee1b0609e70e2",
+    "world_completed_comparison.mp4": "7f0b5642eb098ccfc8fe4fbe8fb4e76d3d2c20aec03d4f19b283ce2f8e96e177",
+    "world_observed_comparison.mp4": "ef74a9733021003d8722ca735f78289594ecba6514c0a1e235a44954bef37b52"
+  },
+  "external_asset_sha256": {
+    "/home/user/HaWoR/_DATA/data_left/mano_left/MANO_LEFT.pkl": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30",
+    "/home/user/HaWoR/_DATA/data/mano/MANO_RIGHT.pkl": "45d60aa3b27ef9107a7afd4e00808f307fd91111e1cfa35afd5c4a62de264767",
+    "/home/user/HaWoR/thirdparty/Metric3D/weights/metric_depth_vit_large_800k.pth": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+    "/home/user/HaWoR/weights/external/detector.pt": "5ef3df44e42d2db52d4ffe91f83a22ce9925e2acc9abebf453f2c5d22e380033",
+    "/home/user/HaWoR/weights/external/droid.pth": "46476ef64cde45a97504910d6f3de2eef7b398ec1c6e4e668815c29076024526",
+    "/home/user/HaWoR/weights/hawor/checkpoints/hawor.ckpt": "4d1cc43853c190d6f2c10d9b6295c73109f0faf9ef41ac817a2b31d94b4823f2",
+    "/home/user/HaWoR/weights/hawor/checkpoints/infiller.pt": "30715e7e72e91d4e164bb762c7ea613dcff5448dbda5fabf40b4054e408cc5c2",
+    "/home/user/HaWoR/weights/hawor/model_config.yaml": "edfe12dc14ce371d698da722b59acfed5b4a38a7f8f5116cbc1fce459a07dd2d",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/rectified/calibrations/rectify_params.yaml": "71623f22a0c1e839f868c11f3dcbe0c32e031297d553d25d65f7b23b0927470a",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/rectified/videos/left_rectified.mp4": "e8fe5443027c1876dc3c46d7bcae50b72e94eb07f4f9c69309820f716c41de6d",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/depth_only/foundation_stereo_video_meta.json": "7b132589a521c6561b1ec82e7d7d9e91b1cea58d001a2980015830246654e3a2"
+  }
+}
