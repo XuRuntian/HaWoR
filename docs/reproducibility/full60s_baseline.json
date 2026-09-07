@@ -1,0 +1,236 @@
+{
+  "schema_version": 1,
+  "publication_date": "2026-09-07",
+  "baseline_tag": "baseline/calibrated-native-backend-full60s-v1",
+  "publication_branch": "experiment/pre-frontend-camera-comparison",
+  "historical_execution_head": "823f4fda8f81667e070ec00c950bbd40635a087d",
+  "historical_execution_note": "Experiments ran with uncommitted interface changes. Original manifests remain unchanged; publication commit is resolved from the annotated baseline tag. Archived per-stage source versions, not historical HEAD alone, identify executed code.",
+  "source_snapshot_note": {
+    "archive": "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/provenance/report_full_native_1788767346455170824/hashes.json",
+    "matching_publication_sources": 24,
+    "differences": [
+      {
+        "path": "scripts/native_backend_infilling.py",
+        "archived_sha256": "f50b6f704ac14da76e0a95edda0d234ed8d93d168f7ec0008c5145ac4e054f11",
+        "publication_sha256": "e94767ea0551cd3e4401f137732c250f424f1282618cfc8713510be6d12eacc2",
+        "scope": "Only report(): execute/archive unittest results, include their status in diagnostics/report, and fix report indentation. No inference, ownership, world conversion or rendering function changes. Historical snapshot was not rewritten."
+      }
+    ]
+  },
+  "experiment_branches": {
+    "experiment/vio-replacement": {
+      "status": "not_run",
+      "baseline": "optimized B of frozen native backend",
+      "change": "Use metric OpenVINS camera poses, bypass Metric3D, scale=1"
+    },
+    "experiment/depth-replacement": {
+      "status": "not_run",
+      "baseline": "optimized B of frozen native backend",
+      "change": "Reuse exact baseline B DROID cache and replace only Metric3D depth source with FoundationStereo"
+    }
+  },
+  "configuration": {
+    "frames_inclusive": [
+      0,
+      1799
+    ],
+    "fps": 30,
+    "image_size_width_height": [
+      1920,
+      1074
+    ],
+    "camera_intrinsics": [
+      [
+        444.43963608648465,
+        0,
+        959.954470803018
+      ],
+      [
+        0,
+        444.43963608648465,
+        543.9405836940584
+      ],
+      [
+        0,
+        0,
+        1
+      ]
+    ],
+    "pilot_frames_inclusive": [
+      88,
+      201
+    ],
+    "windows_inclusive": [
+      [
+        88,
+        94
+      ],
+      [
+        100,
+        114
+      ],
+      [
+        176,
+        182
+      ],
+      [
+        193,
+        201
+      ],
+      [
+        596,
+        602
+      ]
+    ],
+    "native_frontend": "Original native frozen detector and tracking results",
+    "optimized_frontend": "Frozen Consolidation + Offline Temporal Association observation IDs and physical fragments",
+    "camera_prediction_source": "/home/user/HaWoR/outputs/pre_frontend_comparison/calibrated_full_60s",
+    "backend": "Native masked DROID + Metric3D scale fitting + HaWoR world conversion + native infiller",
+    "native_infiller": "Whole-sequence anatomical-side inputs, original overwrite and end-index behavior",
+    "optimized_infiller": "Same model with physical-fragment and side ownership bounded input intervals",
+    "no_external_vio_or_stereo_executed": true
+  },
+  "environment": {
+    "python": "3.10.13 (main, Sep 11 2023, 13:21:10) [GCC 11.2.0]",
+    "torch": "1.13.0+cu117",
+    "cuda": "11.7",
+    "gpu": "NVIDIA GeForce RTX 4070",
+    "package_lock": "requirements-cu117.lock",
+    "pytorch3d_source_commit": "3145dd4d16edaceb394838364b8e87a440f83c10",
+    "submodules": {
+      "thirdparty/DROID-SLAM/thirdparty/eigen": "24e0c2a125d2b37b35719124d1f758777c150ca8",
+      "thirdparty/DROID-SLAM/thirdparty/lietorch": "0fa9ce8ffca86d985eca9e189a99690d6f3d4df6",
+      "thirdparty/DROID-SLAM/thirdparty/lietorch/eigen": "824272cde8ca2541e8b67b0887f5ded92b128d1f"
+    }
+  },
+  "results": {
+    "root": "/home/user/HaWoR/outputs/pre_frontend_comparison/calibrated_native_backend_full_60s",
+    "native": {
+      "lossless_observed": 2364,
+      "post_interface_observed": 2338,
+      "generated": 1261,
+      "missing_slots": 1,
+      "keyframes": 129
+    },
+    "optimized": {
+      "lossless_observed": 2872,
+      "post_interface_observed": 2872,
+      "generated": 42,
+      "missing_slots": 686,
+      "keyframes": 126
+    },
+    "unit_tests_passed": 16,
+    "known_generated_nonpositive_depth_frames": {
+      "native": [
+        975
+      ],
+      "optimized": [
+        922
+      ]
+    },
+    "accuracy_claim": "Not evaluated; availability is not detection recall or pose accuracy"
+  },
+  "archival_note": "file_sha256 pins a selected inventory, not all outputs. Hashed original manifests and audit files index additional protected inputs and per-stage results. Relative paths are rooted at the HaWoR checkout; absolute paths describe the original machine. Data, caches, weights and symlink targets must be preserved outside Git. Fresh GPU reruns are not guaranteed byte-identical.",
+  "file_sha256": {
+    "/home/user/HaWoR/_DATA/data_left/mano_left/MANO_LEFT.pkl": "c4022f7083f2ca7c78b2b3d595abbab52debd32b09d372b16923a801f0ea6a30",
+    "/home/user/HaWoR/_DATA/data/mano_mean_params.npz": "efc0ec58e4a5cef78f3abfb4e8f91623b8950be9eff8b8e0dbb0d036ebc63988",
+    "/home/user/HaWoR/_DATA/data/mano/MANO_RIGHT.pkl": "45d60aa3b27ef9107a7afd4e00808f307fd91111e1cfa35afd5c4a62de264767",
+    "/home/user/HaWoR/thirdparty/Metric3D/weights/metric_depth_vit_large_800k.pth": "15328ffc42b528b95f188687418f6f03b3f123eb34ccdbd686c112abbea6d972",
+    "/home/user/HaWoR/weights/external/detector.pt": "5ef3df44e42d2db52d4ffe91f83a22ce9925e2acc9abebf453f2c5d22e380033",
+    "/home/user/HaWoR/weights/external/droid.pth": "46476ef64cde45a97504910d6f3de2eef7b398ec1c6e4e668815c29076024526",
+    "/home/user/HaWoR/weights/hawor/checkpoints/hawor.ckpt": "4d1cc43853c190d6f2c10d9b6295c73109f0faf9ef41ac817a2b31d94b4823f2",
+    "/home/user/HaWoR/weights/hawor/checkpoints/infiller.pt": "30715e7e72e91d4e164bb762c7ea613dcff5448dbda5fabf40b4054e408cc5c2",
+    "/home/user/HaWoR/weights/hawor/model_config.yaml": "edfe12dc14ce371d698da722b59acfed5b4a38a7f8f5116cbc1fce459a07dd2d",
+    "/home/user/roboego-hand-vis/docs/pipeline/pre_hamer_observation_frontend_migration.md": "44cc73bdc34cf2c1c2a342442b91034a41c581affb1f956e54c1172edc18d8c0",
+    "/home/user/roboego-hand-vis/roboego_hand_vis/egohand/hand_observation_consolidation.py": "c17f86cd46c1647211e9f7da1966dcffbb02f923f042fea761614ec43dca7f2b",
+    "/home/user/roboego-hand-vis/roboego_hand_vis/egohand/physical_hand_temporal_association.py": "de4284aa70fa0bf2ccb44be21a9d765fc282a6d479a4c5a27609272d224b5564",
+    "/home/user/roboego-hand-vis/roboego_hand_vis/egohand/pre_hamer_observation_frontend.py": "9267f60d8d3b73dfe905793e507ddcb763348715da29deab86ab4a438e7e3317",
+    "/home/user/roboego-hand-vis/roboego_hand_vis/settings.py": "ae5b6de6a32966698ff1d79f084f097096151dfe96a2aab9c71a3752167549b5",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/rectified/calibrations/rectify_params.yaml": "71623f22a0c1e839f868c11f3dcbe0c32e031297d553d25d65f7b23b0927470a",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/decoupled_diagnostics/full_60s/rectified/videos/left_rectified.mp4": "e8fe5443027c1876dc3c46d7bcae50b72e94eb07f4f9c69309820f716c41de6d",
+    "/home/user/roboego-hand-vis/tmp/vio_hand_pose_eval/failure_mining/full_60s/cache/full_sequence_temporal_pipeline.json": "3fd1e39450ecc3c3a2f5935152cc668c5552fb6bde4512b3d63c6d518c115d01",
+    "constraints-cu117.txt": "b3f9eb631a21022ab5cf2b556d94b58ae8a552294860b77e6ad5a87d26913a1e",
+    "ENVIRONMENT.md": "292681b5eb8cef637460751f88011c15ee428ea2fab91889e7e355a9dca8e5f7",
+    "hawor/utils/process.py": "3a7a6490c4505c9c773715fd48c8206607536304d46f1cfb5a08fc1dc8de9a5c",
+    "lib/datasets/track_dataset.py": "15f249f44013fb407c08151ec99754b70eedba9f09a18e81055088bd18748d79",
+    "lib/eval_utils/custom_utils.py": "5c9547303ee64537f0a335f10e6c7ef6f00a072d90496f17e737599b2e7cf7ff",
+    "lib/eval_utils/filling_utils.py": "0d5480973163841394dc5ff5e714428fa77c7f9fa41e8f0ebcabc12a7ea8e699",
+    "lib/models/hawor.py": "43c7c9a405233a5a27b4323409105082d4ead5313c4025374d529816976730b5",
+    "lib/models/mano_wrapper.py": "89c3c0ade660110e2757da7c746b3593de18eed4c58e249d4581cd3314915a44",
+    "lib/pipeline/est_scale.py": "8290b092ef2f338f99ec2c8ce40c0c1fef2a0478c4dacf2106351af1f12b0db4",
+    "lib/pipeline/masked_droid_slam.py": "ec7e3510a428774fc875dda045cdc1eb97ae5dadd40edda9668809d8414505f0",
+    "lib/pipeline/tools.py": "6f8d291051bcc048b9bdde67d8f57f7d65b5a2cdba1cbee2278c485569e292a9",
+    "lib/utils/imutils.py": "a3998d65a97a203572e65cf2fb03acc543824b956f58966e8563e93b87c12286",
+    "lib/vis/renderer.py": "08c7e281be05084b793d7691b959319c8e32c46eede7973ea5e7fb2664d53016",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/diagnostics.json": "2785837dd1fafcb22d1aea95affa018aa89d8d7adb238a121e00216a64657bf5",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/full_observation_invariants.json": "cde86faa6e9e039804ae0f76e00da25459e1b0eb3221c932f08d907067e85a03",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/manifest.json": "c27b478e1223de4ce58c6d1c70d0a35d6a8345a029fa7da8f844205028db66b9",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/pilot/validation.json": "8c0f82a7773a8f038f413b63492395aa26687a7ad456e12580e86051df099c9d",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/native/camera_predictions.npz": "c053631021cd17fd2458397b1bad62a61b77cc4995f1f2cc810b1cb6a5e898c4",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/native/chunks.json": "8d7646725ef57986fb9fbec949eff1f347e92c60bdc8bd9cea6632bb4b765b1a",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/native/index.json": "a263b4ba0fbf93a0e1d8f584543b1f81a15dced601b248cf141fd2d2924cc479",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/native/summary.json": "7fb31c78a828794bfe653c6ce3531dfc44959913510d62a396561478bc529e36",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/optimized/camera_predictions.npz": "b5754ddbee47176041f50be005c41d9343dc92934912beaa167791389c8e53cf",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/optimized/chunks.json": "de0c5c473b31529e00075f9af9c235d7200da299e9273187fe933e31d9be3509",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/optimized/index.json": "e50dcc19ebec55c52c2e1a530a517236464c69a0aa4df06ee0cb0044086becb8",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/predictions/optimized/summary.json": "f29edfd864c5ad6d22fd85507f4fcb1a7bc4be974c08d2d0a143fba5fbd4294f",
+    "outputs/pre_frontend_comparison/calibrated_full_60s/report.md": "0f24d3dca89a11a571213bed014877c713879e50c6ca2e40f6c6c02029f38cd7",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/droid_audit.json": "f6468f06fb0bf7f428333a83510bd39da08954c2313ec33dcfd66555cb8ad8c2",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/droid_raw.npz": "4ab6ae172239274f1ee42ea75c0cb17b8973b7a22c6c0d0afb8cc0c87d7afcc9",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/mask_audit.json": "f111c40e9affaeeb3e66ddf1be830417b456d61c5ec9e5f3eaf6521afcb63f8a",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/model_masks.npy": "38790a2122f26cd49b0fd09e96d0c655431afbb64e0502ad48721cb894f3d57e",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/scale_audit.json": "2d1f38f5d64c4a241a1a3aea3b2ff703b41e99cba2f062c389e35a232988061b",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/native/slam_scaled.npz": "846f30b7354190cce6bbd2c55e1e54921032e6668111592e82e0373b779d43d5",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/droid_audit.json": "7891bf3925af09d2505a18b9a716a2e6b093a5ed0a5cd67d2ccee3063d1c201c",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/droid_raw.npz": "a6a046edbe44ace59b8a8ec215e404dc5d0e5d6e57768eef485eec764f765735",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/mask_audit.json": "a8ef4a8a28605dde76943a048449a46f2c511e366591e50eee157451082b84a9",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/model_masks.npy": "d9a31c54cb3f59445508c2b704cbabf0494ccedd06ad6450ab21ed2296f57011",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/scale_audit.json": "3cd3b5a06e73314cb05ee507214d6db04948a2cf2cdba7c7af9a144a0099532a",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/cache/full/optimized/slam_scaled.npz": "82987fb04d1541db1f10bfd7b254e0bd6470f24b5e39af3ceea4b48af55877d6",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/comparison.mp4": "dada79966b74565a4cf7e3f310ae8d4fe381a578443b348be38286e5dde7a694",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/diagnostics.json": "90abc9f9e2612ca5e98930864f8e7eb6c6f376bae44b8ec6cf94d96e4de3d201",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/independent_audit.json": "e4d7efcfa48b80c3ab4d02c847d960fa3397891898c33b23eb8f199c4dbb9c1e",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/manifest.json": "56d3340605f8eb38c31a08fcd66e84fc7b2e087c5d731ccf58bed1d06c4301f6",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/native_overlay.mp4": "64e459d95bb43ea42bba1698c1f538072aef99db7f28a8485afe6ebc276f38c7",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/optimized_overlay.mp4": "435e8fed312cb33eb9e86f4eac114b2031026642caa784b65ad5f7f3d3e41ab9",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/pilot/validation.json": "1db672c1991ffa83b48007a3178e1f80e66426c7e282cac6009f80aab85097e6",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/native/infiller_audit.json": "8c9e9abc61fa176d49e34deec1d053e19841ebeff91f02b369a5c6b1e04b5722",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/native/world_completed.npz": "c17278b9ee6b74ad5031b4f0eeefeb4bdbb789b5072523796500873d7bb92c1c",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/native/world_observed.npz": "e370f99d51e6bc582fa97ba9ce43e895b85e12c1fb4257502e76b4caabebbe2d",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/native/world_validation.json": "37975bd39819825fcef39ae8eae11ec44dd58d16db7573e84dd7e636f3d01814",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/optimized/infiller_audit.json": "e771fcbef4669c13cc4964c80622d5d3bcae55980434bd44dd3045acd9357004",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/optimized/world_completed.npz": "e1c0904f02e8138a2e10a49174b0f9604a124b20e969d79741a1354629c7986a",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/optimized/world_observed.npz": "006dbc365de2901ca596efd6c9d8cb04bfd8fb1b3be724151c4dcfb970333392",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/predictions/optimized/world_validation.json": "9a366e5848e171684428c4254bd1dc3dc9b5bb2c28feb11f536b6629d7f67261",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/provenance/environment/pip-freeze.txt": "94004e42c0a21c014b5b97d373c0a03833f7ed57b7f25e6294628a0116b93d5a",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/provenance/environment/submodules.txt": "486f5087035047dd40e0c4204e13d083d0e6df07a4cb32ce02c3395212208efb",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/provenance/environment/unittest.log": "0db468199f9b83a535b95d0e14c6bde79c49141aefe253c0f4ccb9cd485c7e9e",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/provenance/report_full_native_1788767346455170824/hashes.json": "d7c4219d2608adfdac860b7d2bf6199ea5a7def9d3219e62783ee30c6492aad1",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/render_audit.json": "e320059e94af06883aa3e21c3561c762ce149dd609a0cef4979ef9520f1fca8a",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/report.md": "123b2b1d60e9ba06497c9b204089c6c1f9bab99a862d03fccbc593490f1e0614",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/world_completed_comparison.mp4": "b376a80bec2abfabb02a3cea40b7813ef9b2e632854c9b967e4dde54cc9af76e",
+    "outputs/pre_frontend_comparison/calibrated_native_backend_full_60s/world_observed_comparison.mp4": "4c99b335e1ce5eba9afcf8cab6c1c9e2042095a0cd9daa9c0e5a498c0da90848",
+    "outputs/pre_frontend_comparison/full_60s/audit.json": "33c46efa7d837bab2247f63299bf08cd68abeee6c49a3415df3c2171132f317b",
+    "outputs/pre_frontend_comparison/full_60s/cache/frontend_selection.json": "ed8e130e44cc73f96cafe4ad23dee419d8e1822e0c1f46e123be361b84a26c46",
+    "outputs/pre_frontend_comparison/full_60s/cache/full/native_raw_tracks.npy": "6988e9786800a5a03e5fb0e1ec3b4d42e92205fb66bac116e118482676031e5a",
+    "outputs/pre_frontend_comparison/full_60s/cache/pilot/native_raw_tracks.npy": "9923e2ddb0e6fdd1cbe29b86a8398e58d1c9e40b4c1eded0df0ddb9d6886b3b4",
+    "outputs/pre_frontend_comparison/full_60s/manifest.json": "d281e953e33477d76a7c2222db92f648b6f4da6218bd82892e46ad1c385d946d",
+    "requirements-cu117.lock": "7f00519f0620431af01b9a96a35f8b3bf4b734ef5a5f121876814ae0e24a3bd3",
+    "scripts/audit_native_backend_comparison.py": "cad0221e1120e23a90f19f5e178c73d458ac0d97a4df036ca09a851e9df02780",
+    "scripts/check_external_vio_compatibility.py": "ea7bbc2d2e80d05053313096d71216fd6dc3999bdfe9188f7bd62e3e6d805f5d",
+    "scripts/check_rectified_focal_evidence.py": "3189b34890e1de2e6b852f96db52f34ba062ea6852109d110608a6816d28f04f",
+    "scripts/frontend_comparison_adapter.py": "ef6396fe9bea0ab761dfac6d35b514e7205aac9ade4220a718b6d37901ccd6a6",
+    "scripts/native_backend_infilling.py": "e94767ea0551cd3e4401f137732c250f424f1282618cfc8713510be6d12eacc2",
+    "scripts/run_calibrated_frontend_comparison.py": "ae1c224cddd78e9881da5055cb04316eb442735a60507ff2ec1225eef3729405",
+    "scripts/run_native_backend_comparison.py": "eab12adb59e3952271eaaa9b0c9639b6eb9b8642f45ca1f84758be33eb8d24b3",
+    "scripts/run_native_backend_stages.py": "21905e9bde0fb187ffd928f20096cbed28add1ec9844214b521c2b7d16f45a03",
+    "scripts/run_pre_frontend_comparison.py": "8a7f074b9f2b0aae95f348ccc0d09ec601524dba51164ecad4a4f30a0b968aa7",
+    "scripts/scripts_test_video/detect_track_video.py": "6cda57c3f5a73395ac982c0b3537236df581dbf136d51ee91e7f7066073a5689",
+    "scripts/scripts_test_video/hawor_slam.py": "c0b99d0e0582f7d6287e3860fdfdf7a4b42ae2cf9f229562bb7a9aba516226b4",
+    "scripts/scripts_test_video/hawor_video.py": "01c679c0b8b02bddbb7cf2cd82fa2cfc2c60e2df1d0f210951e1b37fa103b427",
+    "tests/test_calibrated_camera.py": "19e19e68673499934ceb42f68392a09c16d5098afa6f8a36594730ef5722e865",
+    "tests/test_frontend_comparison_adapter.py": "812baa0d1f5b666a355582a350a4d1c142d1e6f4c31cc960b46cafa6c0b7c1f8",
+    "tests/test_native_backend_comparison.py": "00a7fe2702d4ac6ad07d541746ebc01da549eb6069f434645434fed6dc377a5f",
+    "thirdparty/Metric3D/metric.py": "62df1a542e3652b20761e29e8c44b8823c2244f23b02d5ee5d01736d6667a190"
+  }
+}

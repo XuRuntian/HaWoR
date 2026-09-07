@@ -194,7 +194,13 @@ class HAWOR(pl.LightningModule):
         out = {}
         if 'do_flip' in batch:
             pred_cam[..., 1] *= -1
-            center[..., 0] = img_center[..., 0]*2 - center[..., 0] - 1 
+            if 'original_img_center' in batch:
+                # Undo the pixel mirror about image width, not the principal point.
+                center[..., 0] = batch['image_width'].flatten(0, 1) - center[..., 0] - 1
+            else:
+                center[..., 0] = img_center[..., 0]*2 - center[..., 0] - 1
+        if 'original_img_center' in batch:
+            img_center = batch['original_img_center'].flatten(0, 1)
         out['pred_cam'] = pred_cam
         out['pred_pose'] = pred_pose
         out['pred_shape'] = pred_shape
@@ -376,9 +382,10 @@ class HAWOR(pl.LightningModule):
 
         return output
 
-    def inference(self, imgfiles, boxes, img_focal, img_center, device='cuda', do_flip=False):
+    def inference(self, imgfiles, boxes, img_focal, img_center, device='cuda', do_flip=False, *, calibrated_camera=False):
         db = TrackDatasetEval(imgfiles, boxes, img_focal=img_focal, 
-                        img_center=img_center, normalization=True, dilate=1.2, do_flip=do_flip)
+                        img_center=img_center, normalization=True, dilate=1.2, do_flip=do_flip,
+                        calibrated_camera=calibrated_camera)
 
         # Results
         pred_cam = []

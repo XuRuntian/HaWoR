@@ -184,7 +184,9 @@ def prediction_dir(out, phase, branch):
     return out / ("predictions" if phase == "full" else "pilot/predictions") / branch
 
 
-def run_branch(out, phase, branch, tracks, tracking_seconds):
+def run_branch(out, phase, branch, tracks, tracking_seconds, *, camera_intrinsics=None):
+    focal = FOCAL if camera_intrinsics is None else float(camera_intrinsics[0, 0])
+    principal = [WIDTH / 2, HEIGHT / 2] if camera_intrinsics is None else camera_intrinsics[:2, 2]
     target = prediction_dir(out, phase, branch)
     if (target / "summary.json").exists():
         raise ValueError(f"Branch already completed: {target}; do not overwrite silently")
@@ -210,7 +212,7 @@ def run_branch(out, phase, branch, tracks, tracking_seconds):
             result = (run_mano_left if flipped else run_mano)(trans, root, pose, betas=betas)
         vertices = result["vertices"][0].cpu().numpy()
         joints = result["joints"][0].cpu().numpy()
-        projected = joints[..., :2] / joints[..., 2:] * FOCAL + [WIDTH / 2, HEIGHT / 2]
+        projected = joints[..., :2] / joints[..., 2:] * focal + principal
         assert np.isfinite(vertices).all() and np.isfinite(projected).all()
         observed, slots = [], []
         rows_meta = []
@@ -247,12 +249,12 @@ def run_branch(out, phase, branch, tracks, tracking_seconds):
         pieces.append(piece)
         metadata.extend(rows_meta)
 
-    args = SimpleNamespace(video_path=str(video), checkpoint=str(ROOT / "weights/hawor/checkpoints/hawor.ckpt"), img_focal=FOCAL)
+    args = SimpleNamespace(video_path=str(video), checkpoint=str(ROOT / "weights/hawor/checkpoints/hawor.ckpt"), img_focal=focal)
     seed()
     t = time.perf_counter()
     hv.hawor_motion_estimation(args, 0, N, str(seq),
         track_groups=None if branch == "native" else tracks,
-        prediction_callback=capture, render_masks=False)
+        prediction_callback=capture, render_masks=False, camera_intrinsics=camera_intrinsics)
     torch.cuda.synchronize()
     seconds = time.perf_counter() - t
     if not pieces:
@@ -393,7 +395,7 @@ def annotate(frame, title, fi):
     return result
 
 
-def render(out, phase):
+def render(out, phase, *, camera_intrinsics=None):
     result_dir = out if phase == "full" else out / "pilot"
     arrays = {}
     for branch in ("native", "optimized"):
@@ -405,8 +407,10 @@ def render(out, phase):
         for index, fi in enumerate(data["frame_idx"]):
             table[int(fi)].append(index)
         indices[branch] = table
-    renderer = Renderer(WIDTH, HEIGHT, FOCAL, "cuda", bin_size=128, max_faces_per_bin=20000)
-    camera, lights = renderer.create_camera_from_cv(torch.eye(3, device="cuda")[None], torch.zeros(1, 3, device="cuda"))
+    focal = FOCAL if camera_intrinsics is None else float(camera_intrinsics[0, 0])
+    renderer = Renderer(WIDTH, HEIGHT, focal, "cuda", bin_size=128, max_faces_per_bin=20000)
+    render_K = None if camera_intrinsics is None else torch.as_tensor(camera_intrinsics, device="cuda", dtype=torch.float32)[None]
+    camera, lights = renderer.create_camera_from_cv(torch.eye(3, device="cuda")[None], torch.zeros(1, 3, device="cuda"), K=render_K)
     faces = get_mano_faces()
     # Same wrist closure and reversed left winding used by native HaWoR.
     closure = np.array([[92,38,234],[234,38,239],[38,122,239],[239,122,279],
@@ -483,13 +487,15 @@ def render(out, phase):
     return audit
 
 
-def projection_checks(out):
+def projection_checks(out, *, camera_intrinsics=None):
     result = {}
     for branch in ("native", "optimized"):
         with np.load(prediction_dir(out, "pilot", branch) / "camera_predictions.npz") as data:
             assert data["frame_idx"].min() >= PILOT[0] and data["frame_idx"].max() <= PILOT[1]
-            renderer = Renderer(WIDTH, HEIGHT, FOCAL, "cuda", bin_size=128, max_faces_per_bin=20000)
-            camera, _ = renderer.create_camera_from_cv(torch.eye(3, device="cuda")[None], torch.zeros(1, 3, device="cuda"))
+            focal = FOCAL if camera_intrinsics is None else float(camera_intrinsics[0, 0])
+            renderer = Renderer(WIDTH, HEIGHT, focal, "cuda", bin_size=128, max_faces_per_bin=20000)
+            render_K = None if camera_intrinsics is None else torch.as_tensor(camera_intrinsics, device="cuda", dtype=torch.float32)[None]
+            camera, _ = renderer.create_camera_from_cv(torch.eye(3, device="cuda")[None], torch.zeros(1, 3, device="cuda"), K=render_K)
             points = torch.tensor(data["joints_camera"], device="cuda")
             screen = camera.transform_points_screen(points)[..., :2].cpu().numpy()
             error = float(np.max(np.abs(screen - data["joints_2d"])))

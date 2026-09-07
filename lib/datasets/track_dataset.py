@@ -15,7 +15,7 @@ class TrackDatasetEval(Dataset):
     def __init__(self, imgfiles, boxes, 
                  crop_size=256, dilate=1.0,
                 img_focal=None, img_center=None, normalization=True,
-                item_idx=0, do_flip=False):
+                item_idx=0, do_flip=False, calibrated_camera=False):
         super(TrackDatasetEval, self).__init__()
 
         self.imgfiles = imgfiles
@@ -34,6 +34,7 @@ class TrackDatasetEval(Dataset):
         self.img_center = img_center
         self.item_idx = item_idx
         self.do_flip = do_flip
+        self.calibrated_camera = calibrated_camera
 
     def __len__(self):
         return len(self.imgfiles)
@@ -43,16 +44,22 @@ class TrackDatasetEval(Dataset):
         item = {}
         imgfile = self.imgfiles[index]
         scale = self.scales[index] * self.box_dilate
-        center = self.centers[index]
+        center = self.centers[index].copy() if self.calibrated_camera else self.centers[index]
 
         img_focal = self.img_focal
         img_center = self.img_center
 
         img = cv2.imread(imgfile)[:,:,::-1]
+        if self.calibrated_camera:
+            item['original_img_center'] = torch.tensor(img_center).float()
+            item['image_width'] = torch.tensor(img.shape[1]).float()
+            img_center = np.asarray(img_center, dtype=np.float64).copy()
         if self.do_flip:
             img = img[:, ::-1, :]
             img_width = img.shape[1]
             center[0] = img_width - center[0] - 1
+            if self.calibrated_camera:
+                img_center[0] = img_width - img_center[0] - 1
         img_crop = crop(img, center, scale, 
                         [self.crop_size, self.crop_size], 
                         rot=0).astype('uint8')
@@ -75,4 +82,3 @@ class TrackDatasetEval(Dataset):
         
 
         return item
-

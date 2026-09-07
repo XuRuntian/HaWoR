@@ -40,7 +40,7 @@ def load_hawor(checkpoint_path):
 
 def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
                             track_groups=None, prediction_callback=None,
-                            render_masks=True):
+                            render_masks=True, camera_intrinsics=None):
     model, model_cfg = load_hawor(args.checkpoint)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     model = model.to(device)
@@ -54,6 +54,15 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
 
     tracks = np.load(f'{seq_folder}/tracks_{start_idx}_{end_idx}/model_tracks.npy', allow_pickle=True).item()
     img_focal = args.img_focal
+    if camera_intrinsics is not None:
+        camera_intrinsics = np.asarray(camera_intrinsics, dtype=np.float64)
+        if (camera_intrinsics.shape != (3, 3) or not np.isfinite(camera_intrinsics).all()
+                or camera_intrinsics[0, 0] <= 0
+                or not np.isclose(camera_intrinsics[0, 0], camera_intrinsics[1, 1])
+                or not np.allclose(camera_intrinsics[[0, 1], [1, 0]], 0)
+                or not np.array_equal(camera_intrinsics[2], [0, 0, 1])):
+            raise ValueError("HaWoR requires finite, zero-skew square-pixel intrinsics")
+        img_focal = float(camera_intrinsics[0, 0])
     if img_focal is None:
         try:
             with open(os.path.join(seq_folder, 'est_focal.txt'), 'r') as file:
@@ -102,6 +111,8 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
 
     img = cv2.imread(imgfiles[0])
     img_center = [img.shape[1] / 2, img.shape[0] / 2]# w/2, h/2  
+    if camera_intrinsics is not None:
+        img_center = camera_intrinsics[:2, 2].tolist()
     H, W = img.shape[:2]
     model_masks = np.zeros((len(imgfiles), H, W)) if render_masks else None
 
@@ -168,7 +179,9 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
             else:
                 do_flip = True
                 
-            results = model.inference(img_ck, boxes_ck, img_focal=img_focal, img_center=img_center, do_flip=do_flip)
+            inference_kwargs = {} if camera_intrinsics is None else {'calibrated_camera': True}
+            results = model.inference(img_ck, boxes_ck, img_focal=img_focal, img_center=img_center,
+                                      do_flip=do_flip, **inference_kwargs)
 
             data_out = {
                 "init_root_orient": results["pred_rotmat"][None, :, 0], # (B, T, 3, 3)
@@ -220,7 +233,8 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
                     faces = torch.from_numpy(faces_right).cuda()
                 cam_R = torch.eye(3).unsqueeze(0).cuda()
                 cam_T = torch.zeros(1, 3).cuda()
-                cameras, lights = renderer.create_camera_from_cv(cam_R, cam_T)
+                render_K = None if camera_intrinsics is None else torch.as_tensor(camera_intrinsics, device='cuda', dtype=torch.float32)[None]
+                cameras, lights = renderer.create_camera_from_cv(cam_R, cam_T, K=render_K)
                 verts_color = torch.tensor([0, 0, 255, 255]) / 255
                 vertices_i = vertices[[img_i]]
                 rend, mask = renderer.render_multiple(vertices_i.unsqueeze(0).cuda(), faces, verts_color.unsqueeze(0).cuda(), cameras, lights)
