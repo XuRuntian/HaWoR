@@ -1,4 +1,5 @@
 # Project specific data and submodule
+/outputs/pre_frontend_comparison/
 
 /example/video_0
 /weights

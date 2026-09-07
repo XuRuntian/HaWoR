@@ -1,0 +1,22 @@
+# Keep the upstream PyTorch 1.13 / NumPy 1.x environment compatible.
+torch==1.13.0+cu117
+torchvision==0.14.0+cu117
+numpy==1.26.4
+setuptools==69.5.1
+wheel==0.45.1
+pytorch3d==0.7.2
+pytorch-lightning==2.2.4
+torchmetrics==1.4.0
+opencv-python==4.10.0.84
+opencv-python-headless==4.10.0.84
+timm==0.9.16
+ultralytics==8.3.40
+supervision==0.25.1
+aitviewer==1.13.0
+scipy==1.13.1
+plyfile==1.0.3
+hydra-core==1.3.2
+omegaconf==2.3.0
+yapf==0.40.1
+ultralytics-thop==2.0.12
+matplotlib==3.8.4

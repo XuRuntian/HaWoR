@@ -38,7 +38,9 @@ def load_hawor(checkpoint_path):
 
 
 
-def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
+def hawor_motion_estimation(args, start_idx, end_idx, seq_folder, *,
+                            track_groups=None, prediction_callback=None,
+                            render_masks=True):
     model, model_cfg = load_hawor(args.checkpoint)
     device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
     model = model.to(device)
@@ -72,30 +74,36 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
 
     print(f'Running hawor on {video} ...')
 
-    left_trk = []
-    right_trk = []
-    for k, idx in enumerate(tid):
-        trk = tracks[idx]
+    if track_groups is None:
+        left_trk = []
+        right_trk = []
+        for k, idx in enumerate(tid):
+            trk = tracks[idx]
 
-        valid = np.array([t['det'] for t in trk])        
-        is_right = np.concatenate([t['det_handedness'] for t in trk])[valid]
-        
-        if is_right.sum() / len(is_right) < 0.5:
-            left_trk.extend(trk)
-        else:
-            right_trk.extend(trk)
-    left_trk = sorted(left_trk, key=lambda x: x['frame'])
-    right_trk = sorted(right_trk, key=lambda x: x['frame'])
-    final_tracks = {
-        0: left_trk,
-        1: right_trk
-    }
-    tid = [0, 1]
+            valid = np.array([t['det'] for t in trk])
+            is_right = np.concatenate([t['det_handedness'] for t in trk])[valid]
+
+            if is_right.sum() / len(is_right) < 0.5:
+                left_trk.extend(trk)
+            else:
+                right_trk.extend(trk)
+        left_trk = sorted(left_trk, key=lambda x: x['frame'])
+        right_trk = sorted(right_trk, key=lambda x: x['frame'])
+        final_tracks = {0: left_trk, 1: right_trk}
+        tid = [0, 1]
+    else:
+        # Explicit groups preserve physical fragments instead of side merging.
+        final_tracks = track_groups
+        tid = list(final_tracks)
+        for rows in final_tracks.values():
+            sides = {int(row['det_handedness'][0]) for row in rows if row['det']}
+            if len(sides) != 1:
+                raise ValueError("Adapted groups must have one explicit handedness")
 
     img = cv2.imread(imgfiles[0])
     img_center = [img.shape[1] / 2, img.shape[0] / 2]# w/2, h/2  
     H, W = img.shape[:2]
-    model_masks = np.zeros((len(imgfiles), H, W))
+    model_masks = np.zeros((len(imgfiles), H, W)) if render_masks else None
 
     bin_size = 128
     max_faces_per_bin = 20000
@@ -127,7 +135,7 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
 
         # interp bboxes
         valid = np.array([t['det'] for t in trk])
-        if valid.sum() < 2:
+        if valid.sum() < (2 if track_groups is None else 1):
             continue
         boxes = np.concatenate([t['det_box'] for t in trk])
         non_zero_indices = np.where(np.any(boxes != 0, axis=1))[0]
@@ -180,6 +188,9 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
             data_out["init_root_orient"] = angle_axis_to_rotation_matrix(init_root)
             data_out["init_hand_pose"] = angle_axis_to_rotation_matrix(init_hand_pose)
 
+            if prediction_callback is not None:
+                prediction_callback(idx, frame_ck, boxes_ck, do_flip, data_out, results)
+
             # save camera-space results
             pred_dict={
                 k:v.tolist() for k, v in data_out.items()
@@ -190,6 +201,8 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
             with open(pred_path, "w") as f:
                 json.dump(pred_dict, f, indent=1)
 
+            if not render_masks:
+                continue
 
             # get hand mask
             data_out["init_root_orient"] = rotation_matrix_to_angle_axis(data_out["init_root_orient"])
@@ -214,8 +227,9 @@ def hawor_motion_estimation(args, start_idx, end_idx, seq_folder):
                 
                 model_masks[frame_ck[img_i]] += mask
                 
-    model_masks = model_masks > 0 # bool
-    np.save(f'{seq_folder}/tracks_{start_idx}_{end_idx}/model_masks.npy', model_masks)
+    if render_masks:
+        model_masks = model_masks > 0 # bool
+        np.save(f'{seq_folder}/tracks_{start_idx}_{end_idx}/model_masks.npy', model_masks)
     joblib.dump(frame_chunks_all, f'{seq_folder}/tracks_{start_idx}_{end_idx}/frame_chunks_all.npy')
     return frame_chunks_all, img_focal
 
@@ -363,5 +377,3 @@ def hawor_infiller(args, start_idx, end_idx, frame_chunks_all):
     save_path = os.path.join(seq_folder, "world_space_res.pth")
     joblib.dump([pred_trans, pred_rot, pred_hand_pose, pred_betas, pred_valid], save_path)
     return pred_trans, pred_rot, pred_hand_pose, pred_betas, pred_valid
-
-    
