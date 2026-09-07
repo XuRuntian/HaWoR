@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "completed_date": "2026-09-07",
+  "status": "completed",
+  "branch": "experiment/vio-replacement",
+  "result_tag": "result/vio-replacement-full60s-run002",
+  "execution_commit": "45aab4f1217eb286162ba5be5fe604929ebd9129",
+  "baseline_commit": "1042818a927cbd366e3397aefbd8d44ab5ca3ea7",
+  "execution_note": "Result publication is a later documentation-only commit; execution used the clean committed code above.",
+  "output_root": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+  "frames_inclusive": [
+    0,
+    1799
+  ],
+  "fps": 30,
+  "validation": {
+    "passed": true,
+    "git_head": "45aab4f1217eb286162ba5be5fe604929ebd9129",
+    "baseline_commit": "1042818a927cbd366e3397aefbd8d44ab5ca3ea7",
+    "predictions": {
+      "baseline": {
+        "observed_instances": 2872,
+        "generated_instances": 42,
+        "missing_slots": 686,
+        "observed_geometry_max_error": 7.152557373046875e-7,
+        "generated_owners_checked": 42,
+        "nonpositive_depth_frames": [
+          922
+        ],
+        "nonpositive_observed_instances": 0,
+        "camera_source_frames": 1800,
+        "camera_interpolated_frames": 0,
+        "camera_missing_frames": 0,
+        "observed_hands_on_interpolated_camera_frames": 0,
+        "generated_hands_on_interpolated_camera_frames": 0
+      },
+      "vio": {
+        "observed_instances": 2872,
+        "generated_instances": 42,
+        "missing_slots": 686,
+        "observed_geometry_max_error": 0.000006817281246185303,
+        "generated_owners_checked": 42,
+        "nonpositive_depth_frames": [],
+        "nonpositive_observed_instances": 0,
+        "camera_source_frames": 1798,
+        "camera_interpolated_frames": 2,
+        "camera_missing_frames": 0,
+        "observed_hands_on_interpolated_camera_frames": 2,
+        "generated_hands_on_interpolated_camera_frames": 0
+      },
+      "generated_joint_camera_change_m": {
+        "count": 882,
+        "median": 0.00127859553322196,
+        "p95": 0.011824168683961024,
+        "max": 0.6134238839149475
+      },
+      "passed": true,
+      "same_hand_masks_ids_and_infiller_context": true
+    },
+    "camera_adapter": {
+      "passed": true,
+      "source_pose_count": 1798,
+      "interpolated_pose_count": 2,
+      "missing_after_adaptation": 0,
+      "gaps": [
+        {
+          "frame_idx": 550,
+          "original_frame_idx": 12820,
+          "timestamp_camera": 1785855109.4666762,
+          "anchor_frames": [
+            549,
+            551
+          ],
+          "weight": 0.49997317548597076
+        },
+        {
+          "frame_idx": 559,
+          "original_frame_idx": 12829,
+          "timestamp_camera": 1785855109.767834,
+          "anchor_frames": [
+            558,
+            560
+          ],
+          "weight": 0.5173935432192359
+        }
+      ],
+      "loader_rotation_max_error": 1.2212453270876722e-15,
+      "full_timeline_both_hands_projection_roundtrip_max_px": 1.978150976356119e-11,
+      "exact_frame_ids_and_timestamps": true,
+      "seconds_including_input_verification": 6.83165877799911,
+      "coordinate_conversion": "T_world_rect = T_world_raw @ blockdiag(R1.T,1)",
+      "scale": 1,
+      "extra_imu_extrinsic_or_time_offset_applied": false,
+      "source_world_origin_retained": true,
+      "camera_gaps_are_not_hand_observations": true
+    },
+    "trajectory": {
+      "alignment": "Each first camera to identity using SE(3) only, no fitted scale",
+      "common_source_frames": 1798,
+      "interpretation": "Estimated trajectory and between-method differences, not ground-truth errors",
+      "arms": {
+        "baseline": {
+          "path_length_m_full_including_camera_interpolation": 8.241960104894503,
+          "net_displacement_m": 0.4433838300916146,
+          "speed_m_s_common_adjacent_source_frames": {
+            "count": 1795,
+            "median": 0.09807412622260217,
+            "p95": 0.37030209655310004,
+            "max": 0.8046939230063508
+          },
+          "angular_speed_deg_s_common_adjacent_source_frames": {
+            "count": 1795,
+            "median": 21.0141664318529,
+            "p95": 85.52514746620301,
+            "max": 181.07559935093542
+          }
+        },
+        "vio": {
+          "path_length_m_full_including_camera_interpolation": 14.91036881875893,
+          "net_displacement_m": 0.7578520084288825,
+          "speed_m_s_common_adjacent_source_frames": {
+            "count": 1795,
+            "median": 0.1805194086797978,
+            "p95": 0.6411006207141596,
+            "max": 1.3851544326058742
+          },
+          "angular_speed_deg_s_common_adjacent_source_frames": {
+            "count": 1795,
+            "median": 20.763407585425746,
+            "p95": 85.65581977208251,
+            "max": 181.38271754702288
+          }
+        }
+      },
+      "position_difference_m_common_source_frames": {
+        "count": 1798,
+        "median": 0.16175991561979225,
+        "p95": 0.3436130697209141,
+        "max": 0.3549282090502522
+      },
+      "rotation_difference_deg_common_source_frames": {
+        "count": 1798,
+        "median": 0.7465106234698972,
+        "p95": 1.2109047154672992,
+        "max": 2.9387720874541405
+      }
+    },
+    "protected_files_unchanged": 1911,
+    "unit_tests_exit_code": 0
+  },
+  "unit_tests_passed": 24,
+  "stages": [
+    {
+      "stage": "prepare",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "prepare"
+      ],
+      "exit_code": 0,
+      "seconds": 10.647759186002077,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771755689427858_prepare.log"
+    },
+    {
+      "stage": "pilot",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "pilot"
+      ],
+      "exit_code": 0,
+      "seconds": 6.121788174001267,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771766337553254_pilot.log"
+    },
+    {
+      "stage": "render-pilot",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "render-pilot"
+      ],
+      "exit_code": 0,
+      "seconds": 57.10569721698994,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771772459712539_render-pilot.log"
+    },
+    {
+      "stage": "validate",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "validate"
+      ],
+      "exit_code": 0,
+      "seconds": 3.355089656994096,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771853871894628_validate.log"
+    },
+    {
+      "stage": "full",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "full"
+      ],
+      "exit_code": 0,
+      "seconds": 13.531545206991723,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771857227362473_full.log"
+    },
+    {
+      "stage": "render",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "render"
+      ],
+      "exit_code": 0,
+      "seconds": 812.694573959001,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788771870759368728_render.log"
+    },
+    {
+      "stage": "report",
+      "command": [
+        "/home/user/miniconda3/envs/hawor/bin/python",
+        "/home/user/HaWoR/scripts/run_vio_replacement.py",
+        "--output",
+        "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002",
+        "--stage",
+        "report"
+      ],
+      "exit_code": 0,
+      "seconds": 22.658974778008997,
+      "complete_process_log": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/process_logs/run_002/1788772683454263158_report.log"
+    }
+  ],
+  "failed_attempt": {
+    "output_root": "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_001",
+    "execution_commit": "0dec65a",
+    "stage": "pilot",
+    "cause": "Double VIO cameras incompatible with original float32 MANO/infiller einsum",
+    "resolution": "Preserve float64 source adapter but use float32 native execution camera cache. Fix committed before fresh run_002. No old run rewritten."
+  },
+  "manual_inspection_note": "VIO generated hand still visibly deviates at frame 922 despite no nonpositive joint depth. Fixed world overview has small meshes; use RGB overlays for hand detail. See visual_inspection.json.",
+  "file_sha256": {
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/manifest.json": "b9ee4528d27586e0777046d36e5137450abf5aee6a14efad7976e5cced7a9640",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/diagnostics.json": "58d22e34b678a5e51dba0bc1decacb9bf19879322901046e4aaba6a70a132a29",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/report.md": "1da770354d074f3c570714cd72362fd674b635f64350b2e7c39f94b8ff742c5f",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/prediction_audit.json": "97c7281fc719fda185795eb86cd316c140c97c874edd4999257528d2c95d5aec",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/render_audit.json": "d5288fcdec820b4f59897edc84b80e4566c43bf8ab4972adeb4d213841a1346a",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/visual_inspection.json": "ed67a7d2f804d705c3f9730e0d5bebd4dde0215ecc0af95644210e5c4b587b0c",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/cache/vio_pose_adapter.npz": "eb50bb6b2cbd2df46a9e4fdf806920e348f466d531bdf75c9ab690c6c920025c",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/cache/vio_adapter_audit.json": "60d1d00ea5c3ff0e212444778bb035258b5548916c2198fc31e38b017571302c",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/pilot/validation.json": "208a7ee21912452d775fad60ecb1c1e40b20c08e6108125a41ba1ad088bc9bdf",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/pilot/prediction_audit.json": "ef319a120675ce701541f5c92a98c82c859179ac0071424be95409c4047be0ee",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/pilot/render_audit.json": "e8cc5c15f3c01a6f65c730ed0c68bf152e1ab84ed60de2fce9fca80570988d03",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/aligned_camera_trajectories.npz": "59501b07d8ec1ab308d84610054cddc033eabb4be738aab1299c54824c5f1bb1",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/camera_trajectory_comparison.png": "dab2ff4ed5372d883212db3683e3f6d5815db88021acd683ffc03388b1e11bf9",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/provenance/unittest.log": "481ce3ccc6147c6a6a4469e106e334cec8949833b068959bac91593f63907034",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/provenance/pip-freeze.txt": "94004e42c0a21c014b5b97d373c0a03833f7ed57b7f25e6294628a0116b93d5a",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/provenance/submodules.txt": "54d196b8b779cda3603a4fdc589c41546f89811d71408eeef40489878ee101f3",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/baseline_overlay.mp4": "dfe932ac40186b1187744e5d14ef83f9712a49e85e72ffb4f37d2a18da66f7d4",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/vio_overlay.mp4": "5664b9d67c9539e262a14d561d56074b9409e879306fd84d099a5a44932d6db1",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/comparison.mp4": "00ea52f218229972be001c6a3f72a88e164944239e9bf8b99fc1699b6d8204c9",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/world_observed_comparison.mp4": "8c78532d27f109f44f9f9869a015adce30557fc7381acf6a9af11fa0d8d3b1fa",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/world_completed_comparison.mp4": "9fd311668769cd70b7967831671bc4728e51d55f23ffd4fa6e4e6225d9d4d898",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/camera_poses.npz": "3fa2ddc66089cb0dea74d130ce8028f39ec51263cb8d09ffe1c6fbae565c71c7",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/predictions/optimized/world_observed.npz": "006dbc365de2901ca596efd6c9d8cb04bfd8fb1b3be724151c4dcfb970333392",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/predictions/optimized/world_completed.npz": "e1c0904f02e8138a2e10a49174b0f9604a124b20e969d79741a1354629c7986a",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/predictions/optimized/row_camera_status.npz": "6a16288454db93922e8a1d3853b1d45c91211f88fb617682da182bef8b020757",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/predictions/optimized/infiller_audit.json": "e771fcbef4669c13cc4964c80622d5d3bcae55980434bd44dd3045acd9357004",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/baseline/predictions/optimized/world_validation.json": "9a366e5848e171684428c4254bd1dc3dc9b5bb2c28feb11f536b6629d7f67261",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/camera_poses.npz": "0d5a9224e4fd21cebdcf9b1660c25a1d0296cede643d5afd038f5d8d9f5d11de",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/predictions/optimized/world_observed.npz": "e8dfe730fd539961b9017fa43c164e5bdc25abff739bca5617558d2f29cce5b4",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/predictions/optimized/world_completed.npz": "81b504cdc8e408056e251a5741bf81b6f6d491c0c3daa2e7974cc155a603be2e",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/predictions/optimized/row_camera_status.npz": "eaac2ac076d5cb09f31253c922d2c8a9ebc395b38fa7190af8fe853a387822fb",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/predictions/optimized/infiller_audit.json": "8d5ab01a19058c302894920d0a3f464ff97ed8cbc8e6319fba62fb424d64ad05",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/arms/vio/predictions/optimized/world_validation.json": "7120c20053c01fb763c16bb1a1dde9ebae4be54206be33438438f6f118c496f1",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0088-0094/baseline_overlay.mp4": "59c75a78467fb25cfcc1ae0c2ac2af59aede4f7e928225cd51fad3cb2e3ae078",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0088-0094/vio_overlay.mp4": "f94236e539147b46fc04978a984d893544f4f68b619737f5c343216717cfe7cb",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0088-0094/comparison.mp4": "94825141decf6ff5dacd535001c58b3e5c405f1f7ad67dd39b8dcbca160288a6",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0088-0094/world_observed_comparison.mp4": "4256fe487387c09f500399b980697493fc253323297255e7c1f1ed63a01000b6",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0088-0094/world_completed_comparison.mp4": "3ee557096645c9602411f1267cdacf284b041fa5d6e19473cefd91981cb17af9",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0100-0114/baseline_overlay.mp4": "7d3c8ab428c969bca0ee33f28af26aca07298c4fdbbb3262f66b7c2c6df7704a",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0100-0114/vio_overlay.mp4": "777d3327900317af4fd9a1d816025ec85fa7cb53c4299d41351836279ebe396b",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0100-0114/comparison.mp4": "4f64f24ee585874638b5349a20b15d2a6d2fdde9ccf38c7013e8b7a271cec0a6",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0100-0114/world_observed_comparison.mp4": "2bd66ef69c38c9346b082f5fa49cab57022caabdfd57e774007e6baabd7a0a0a",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0100-0114/world_completed_comparison.mp4": "cd0d05ecfffe52cba61baac7e4e8bc79eee003db61578b43cf813a328c6a3458",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0176-0182/baseline_overlay.mp4": "0e19925cd1b3273de43aec508feb793c202efc376aa3fb575443e4574cb4625d",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0176-0182/vio_overlay.mp4": "b58972cc73f52d4f680c95ea9d141625f1fed55ea9e603259c9bb6b712bf9b6b",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0176-0182/comparison.mp4": "ee41acfaa030676b9e7e4a7f37c1dd98ac4fcf78912dfb840671f4894ba94402",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0176-0182/world_observed_comparison.mp4": "4f77322805a5dcc76fad17982f813c420f9e8bb715bf4b7d510029913fb4e6d9",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0176-0182/world_completed_comparison.mp4": "7488ec40fc1f573ac7410fcebc84b935f3ff6badbd71199cbbcb827e63b6f689",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0193-0201/baseline_overlay.mp4": "c10cb6be9567092594a2f32b78dd9f7aaea8079844bbc0d6059e48ba6727547d",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0193-0201/vio_overlay.mp4": "58fa357b49813a258dee9efff3c66b23b86e5252e85f37f150c50f374a179680",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0193-0201/comparison.mp4": "fac6266551d85da980b7adc8de57457c654417b7b401ad526985a2ef2e4cd017",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0193-0201/world_observed_comparison.mp4": "6704e9b425975616dc54b53f277e6e60630c023824d3d6740ac8ee3342aee50f",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0193-0201/world_completed_comparison.mp4": "960b30c095287f1922ace976c86d7a2f0f436920c34f1648c303abdeb2b14407",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0596-0602/baseline_overlay.mp4": "12bb6027b0195b493a03371d161b1125840f0ceff30e4d2e3a281a53cc253644",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0596-0602/vio_overlay.mp4": "b1969bd294528e2a96ddd07f39a79e3abb51a5c8dd4b62ddf1f796857d475016",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0596-0602/comparison.mp4": "31b6c5972f9d51592fa14bca9e6de22e7207fb2cc3b7d1f5a2c8710dacbd4ea1",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0596-0602/world_observed_comparison.mp4": "dac418808dbe83d1b1a7842c3474374d3bbed7377d807a83315401da536b5191",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0596-0602/world_completed_comparison.mp4": "b130667d6af20507ba108df1c748c284a2d7005a00b205734a56b59563019e10",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0544-0564/baseline_overlay.mp4": "dd21073777ae5f2af386294a3a21eebdecc427c437d114c114727734706334c1",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0544-0564/vio_overlay.mp4": "4fcd14b0c79ceab57b06830c5a6f01afedc513ae3f3de611f7d4d8252dcb5053",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0544-0564/comparison.mp4": "1f7240d46aadabaac042a8b768c42a23041d2a99043ea422b5acb8e892d74eb7",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0544-0564/world_observed_comparison.mp4": "2ba9aaa31e4aeea904da56c6d80e946e8593f39d586f085b48ada20ea82edcfc",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0544-0564/world_completed_comparison.mp4": "695ab8ccc352cc0020a737083db970ae7479d341ee93caa9f693d7891b2243a4",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0918-0926/baseline_overlay.mp4": "cb53b044a3ad028059e388242acd160601b93da06afa6104bdf5919de06a1941",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0918-0926/vio_overlay.mp4": "9669fedd8f1ed0fe8931bc57db176cb39165218e42ff0bc2647f0635418b67f3",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0918-0926/comparison.mp4": "399a387c178c13d91d910338c1e5ea185303ebfe394e275d6e43bfb01c39814c",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0918-0926/world_observed_comparison.mp4": "865a4da4a3be01eaa3c0ebc3a665d6e64f3a480c97f1ea8af4abaef69b27ffdf",
+    "/home/user/HaWoR/outputs/pre_frontend_comparison/vio_replacement_full_60s/run_002/windows/0918-0926/world_completed_comparison.mp4": "6ba87b6eff53a828579b20d23ae8c917b75d0fc6db3ed8a761bc82c64dee8210"
+  },
+  "artifact_note": "Selected hashes identify actual archives, not byte-identical GPU rerun guarantees. Large data/models/videos are local and excluded from Git; preserve frozen baseline archives and external VIO/timestamps. Depth replacement has not run."
+}
