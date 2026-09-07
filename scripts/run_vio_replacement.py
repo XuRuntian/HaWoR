@@ -13,7 +13,7 @@ import yaml
 
 import run_native_backend_comparison as backend
 import native_backend_infilling as completion
-from vio_camera_adapter import adapt_camera_poses
+from vio_camera_adapter import adapt_camera_poses, native_camera_fields
 
 base = backend.base
 ROOT = base.ROOT
@@ -124,7 +124,7 @@ def prepare(out):
         root = arm_root(out, arm)
         (root/"cache").mkdir(parents=True)
         (root/"cache/frames").symlink_to(backend.SOURCE/"cache/frames", target_is_directory=True)
-        camera = baseline_camera if arm == "baseline" else adapted
+        camera = baseline_camera if arm == "baseline" else native_camera_fields(adapted)
         for phase in ("pilot", "full"):
             frames = backend.frame_ids(phase)
             cache = backend.folder(root, phase, "optimized")
@@ -165,6 +165,7 @@ def prepare(out):
         "protected_sha256": protected, "code_sha256": code_hashes,
         "source_trajectory": str(VIO), "vio_source_schema": {key: {"shape": list(value.shape), "dtype": str(value.dtype)} for key, value in source.items()},
         "source_original_frames": [first, first+1799], "camera_gap_policy": "Isolated single-frame linear translation + timestamp SLERP; flags retained",
+        "vio_precision": "Float64 adapter/source archive retained; float32 traj/scale at unchanged native HaWoR infiller boundary",
         "hand_infiller_policy": "Unchanged frozen optimized B physical/side ownership bounded native infiller",
         "baseline_reuse": "Full predictions, infiller outputs and scaled DROID copied by read-only symlinks; no new DROID/Metric3D inference",
         "pilot_policy": "Both arms slice their FULL camera trajectories at 88..201 and run identical pilot ownership intervals; not the historical short DROID run",
@@ -363,6 +364,8 @@ the IMU-camera extrinsic and timestamp convention. Neither is applied twice. Raw
 conversion is T_world_rect = T_world_raw @ blockdiag(R1.T,1), with scale=1. Original source world
 coordinates remain in predictions. Each first-camera SE(3) origin is used only for comparative rendering
 and trajectory diagnostics; no fitted scale alignment is applied.
+The float64 source/adapter archive is retained separately. Native execution cameras are float32,
+matching the original HaWoR infiller's MANO tensors; no native model code is changed for this conversion.
 
 ## Missing Cameras Are Not Missing Hands
 

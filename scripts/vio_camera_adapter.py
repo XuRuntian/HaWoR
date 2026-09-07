@@ -4,6 +4,12 @@ import numpy as np
 from scipy.spatial.transform import Rotation, Slerp
 
 
+def native_camera_fields(adapted):
+    """The unmodified HaWoR infiller combines cameras with float32 MANO tensors."""
+    return {"traj": np.asarray(adapted["traj"], dtype=np.float32),
+            "scale": np.asarray(adapted["scale"], dtype=np.float32)}
+
+
 def check_transforms(transforms):
     transforms = np.asarray(transforms, dtype=np.float64)
     if transforms.ndim != 3 or transforms.shape[1:] != (4, 4):

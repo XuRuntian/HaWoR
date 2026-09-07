@@ -32,6 +32,12 @@ twice. Convert raw-left camera to rectified-left with
 `[tx,ty,tz,qx,qy,qz,qw]`, `scale=1`. The exported K is used without subtracting
 the historical rectification crop offset a second time.
 
+The adapter/source archive retains float64 precision. HaWoR execution camera
+`traj` and `scale` use float32, matching its native MANO/infiller tensor contract.
+The initial `run_001` pilot caught a Double/Float mismatch at that boundary; its
+failure log is retained. The fix changes serialization only, not native model
+code. The next attempt uses a new `run_002` directory.
+
 Only isolated interior single-frame camera gaps may be filled, using linear
 translation and SciPy SLERP weighted by actual timestamps. Expected gaps are
 frames 550 and 559; any different gap pattern fails this fixed experiment.

@@ -6,7 +6,7 @@ import numpy as np
 from scipy.spatial.transform import Rotation
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]/"scripts"))
-from vio_camera_adapter import adapt_camera_poses
+from vio_camera_adapter import adapt_camera_poses, native_camera_fields
 
 
 class VioAdapterTest(unittest.TestCase):
@@ -26,6 +26,17 @@ class VioAdapterTest(unittest.TestCase):
         self.assertEqual(result["scale"], 1)
         self.assertTrue(result["camera_pose_from_source"].all())
         self.assertFalse(result["camera_pose_interpolated"].any())
+
+    def test_native_camera_precision_does_not_mutate_double_source(self):
+        time, frames, source = self.fixture()
+        adapted = adapt_camera_poses(time, frames, source, np.eye(3))
+        native = native_camera_fields(adapted)
+        self.assertEqual(native["traj"].dtype, np.float32)
+        self.assertEqual(native["scale"].dtype, np.float32)
+        self.assertEqual(adapted["traj"].dtype, np.float64)
+        np.testing.assert_allclose(native["traj"], adapted["traj"], atol=1e-7)
+        native["traj"][0, 0] = 99
+        self.assertEqual(adapted["traj"][0, 0], 0)
 
     def test_gap_uses_timestamp_weight_and_slerp_without_row_shift(self):
         time, frames, source = self.fixture((0, 2, 3))
